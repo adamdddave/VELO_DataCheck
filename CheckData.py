@@ -20,12 +20,12 @@ def make_dataframes(infile):
         t = float(t)
         #print (ts,n,v,t,o)
         n=n.strip()
-        date,ts = ts.split("T")
         datasets[n].append([ts,v,t,o])
         #sys.exit()
     dfs = {}
     for dsk,ds in datasets.items():
         dfs[dsk]=pd.DataFrame(ds, columns=['Time','Voltage','Temp','Offset'])
+        dfs[dsk]['Time'] = pd.to_datetime(dfs[dsk]['Time'])
         print (dfs[dsk].head())
 
 
